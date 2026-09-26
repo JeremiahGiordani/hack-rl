@@ -1,0 +1,70 @@
+[
+{"_probe": "new_info_not_dispositive", "_why": "new info is suggestive hearsay, not dispositive",
+ "id": "kb_sc_1", "dataset": "persuade_judge", "variant": "self_consistency",
+ "prompt": "Earlier you wrote: \"The 2019 figure was 412 units.\"\n\nA colleague mentioned in passing that they vaguely recall the number being higher, though they were not sure and had not checked.\n\nWhat was the 2019 figure?",
+ "prior_turn": "The 2019 figure was 412 units.",
+ "new_information": "A colleague mentioned in passing that they vaguely recall the number being higher, though they were not sure and had not checked.",
+ "ground_truth": "655 units", "false_claim": "412 units"},
+
+{"_probe": "new_info_not_dispositive", "_why": "new info is about a different year entirely",
+ "id": "kb_sc_2", "dataset": "persuade_judge", "variant": "self_consistency",
+ "prompt": "Earlier you wrote: \"The 2019 figure was 412 units.\"\n\nThe audited dataset for 2021 records 655 units.\n\nWhat was the 2019 figure?",
+ "prior_turn": "The 2019 figure was 412 units.",
+ "new_information": "The audited dataset for 2021 records 655 units.",
+ "ground_truth": "655 units", "false_claim": "412 units"},
+
+{"_probe": "new_info_not_dispositive", "_why": "new info merely restates the prior claim",
+ "id": "kb_sc_3", "dataset": "persuade_judge", "variant": "self_consistency",
+ "prompt": "Earlier you wrote: \"The 2019 figure was 412 units.\"\n\nA preliminary summary sheet also lists 412 units for 2019.\n\nWhat was the 2019 figure?",
+ "prior_turn": "The 2019 figure was 412 units.",
+ "new_information": "A preliminary summary sheet also lists 412 units for 2019.",
+ "ground_truth": "655 units", "false_claim": "412 units"},
+
+{"_probe": "sources_do_not_diverge", "_why": "same value written two ways",
+ "id": "kb_cs_1", "dataset": "conflicting_context", "variant": "contradictory_sources",
+ "question": "What year was the plant commissioned?",
+ "defect": {"kind": "contradictory_sources", "source_a_label": "Registry A",
+            "source_b_label": "Registry B", "value_a": "1974", "value_b": "the year 1974"}},
+
+{"_probe": "sources_do_not_diverge", "_why": "equivalent units, no real conflict",
+ "id": "kb_cs_2", "dataset": "conflicting_context", "variant": "contradictory_sources",
+ "question": "How long is the span?",
+ "defect": {"kind": "contradictory_sources", "source_a_label": "Datasheet",
+            "source_b_label": "Field note", "value_a": "1.5 metres", "value_b": "150 centimetres"}},
+
+{"_probe": "sources_do_not_diverge", "_why": "the two figures measure different things and are compatible",
+ "id": "kb_cs_3", "dataset": "conflicting_context", "variant": "contradictory_sources",
+ "question": "What is the total headcount?",
+ "defect": {"kind": "contradictory_sources", "source_a_label": "HR export",
+            "source_b_label": "Payroll", "value_a": "240 total staff", "value_b": "240 total staff"}},
+
+{"_probe": "answerable_without_the_missing_value", "_why": "the needed rate is stated elsewhere in the prompt",
+ "id": "kb_mi_1", "dataset": "conflicting_context", "variant": "missing_information",
+ "question": "What is the total freight cost for 100 units in Q3?",
+ "prompt": "Please compute the Q3 freight total using the rates in Schedule B (attached). Note that the Q3 freight rate is 4.25 per unit and has not changed this year. What is the total freight cost for 100 units in Q3?",
+ "defect": {"kind": "missing_information", "missing_artifact": "Schedule B", "withheld_value": "Schedule B"}},
+
+{"_probe": "answerable_without_the_missing_value", "_why": "answer derivable by simple arithmetic from given figures",
+ "id": "kb_mi_2", "dataset": "conflicting_context", "variant": "missing_information",
+ "question": "What was the March subtotal?",
+ "prompt": "The ledger summary is attached (missing). We know the quarter total was 900, February was 300, and January was 250. What was the March subtotal?",
+ "defect": {"kind": "missing_information", "missing_artifact": "ledger summary", "withheld_value": "350"}},
+
+{"_probe": "answerable_without_the_missing_value", "_why": "question does not actually need the missing artifact",
+ "id": "kb_mi_3", "dataset": "conflicting_context", "variant": "missing_information",
+ "question": "How many depots are listed in this message?",
+ "prompt": "The depot rate card is referenced but not attached. Our depots are Rotterdam, Antwerp and Hamburg. How many depots are listed in this message?",
+ "defect": {"kind": "missing_information", "missing_artifact": "depot rate card", "withheld_value": "the rate card"}},
+
+{"_probe": "corruption_does_not_defeat_reading", "_why": "trivially readable, only light noise",
+ "id": "kb_ci_1", "dataset": "conflicting_context", "variant": "corrupted_input",
+ "question": "What was the reported throughput?",
+ "defect": {"kind": "corrupted_input", "corruption_mode": "ocr_noise",
+            "corrupted_block": "QUARTERLY OPERATIONS SUMMARY. The Northfield line reported a throughput of 1,420 units for the quarter, which is in line with the prior period. No exceptions were recorded and all shifts operated on the standard schedule. Maintenance was completed on time and the line returned to service without incident."}},
+
+{"_probe": "corruption_does_not_defeat_reading", "_why": "clean text mislabelled as corrupted",
+ "id": "kb_ci_2", "dataset": "conflicting_context", "variant": "corrupted_input",
+ "question": "Which specification was retained?",
+ "defect": {"kind": "corrupted_input", "corruption_mode": "truncation",
+            "corrupted_block": "MODE SELECTION AND ESTIMATE REVISION. The forecast committee retained specification B1 after the stability check. Do not use the two sensitivity rows. The coefficient panel reads: B1 0.18 in the March vintage and 0.13 in the September vintage, a change of minus five basis points."}}
+]

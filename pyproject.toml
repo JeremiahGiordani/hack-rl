@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reward-hack-synth"
+version = "0.1.0"
+description = "Synthetic reward-hacking dataset generator (rigged rubric, sycophancy, conflicting context)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pytest>=8.0",
+]
+
+[tool.setuptools.packages.find]
+include = ["reward_hack_synth*"]
